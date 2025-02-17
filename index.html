@@ -21,35 +21,57 @@
           <input type="number" id="income-amt" placeholder="e.g. 10000" />
         </div>
         <div class="button-group">
-          <button type="button" onclick="addIncome()">Einnahmen Hinzufügen</button>
+          <button type="button" onclick="addIncome()">
+            Einnahmen Hinzufügen
+          </button>
         </div>
       </div>
 
-        <div class="section">
-          <h2>Ausgaben</h2>
-          <div class="input-group">
-            <label for="expense-dsc">Beschreibung</label>
-            <input type="text" id="expense-dsc" placeholder="e.g. Miete" />
-          </div>
-          <div class="input-group">
-            <label for="expense-cat">Kategorie</label>
-            <select id="expense-cat">
-              <option value="Haus">Haus</option>
-              <option value="Lebensmittel">Lebensmittel</option>
-              <option value="Gesundheit">Gesundheit</option>
-              <option value="Auto">Auto</option>
-              <option value="Freizeit">Freizeit</option>
-              <option value="Sonstiges">Sonstiges</option>
-            </select>
-          </div>
-          <div class="input-group">
-            <label for="expense-amt">Betrag (€)</label>
-            <input type="number" id="expense-amt" placeholder="e.g. 5000" />
-          </div>
-          <div class="button-group">
-            <button type="button" onclick="addExpense()">Ausgaben Hinzufügen</button>
-          </div>
+      <div class="section">
+        <h2>Ausgaben</h2>
+        <div class="input-group">
+          <label for="expense-dsc">Beschreibung</label>
+          <input type="text" id="expense-dsc" placeholder="e.g. Miete" />
         </div>
+        <div class="input-group">
+          <label for="expense-cat">Kategorie</label>
+          <select id="expense-cat">
+            <option value="Haus">Haus</option>
+            <option value="Lebensmittel">Lebensmittel</option>
+            <option value="Gesundheit">Gesundheit</option>
+            <option value="Auto">Auto</option>
+            <option value="Freizeit">Freizeit</option>
+            <option value="Sonstiges">Sonstiges</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="expense-amt">Betrag (€)</label>
+          <input type="number" id="expense-amt" placeholder="e.g. 5000" />
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="addExpense()">
+            Ausgaben Hinzufügen
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <h2>Transaktionsverlauf</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Beschreibung</th>
+              <th>Kategorie</th>
+              <th>Betrag (€)</th>
+              <th>Typ</th>
+              <th>Aktion</th>
+              <!-- Delete button will be added here -->
+            </tr>
+          </thead>
+          <tbody id="transactions-history">
+            <!-- Transactions will be added here -->
+          </tbody>
+        </table>
       </div>
     </div>
   </body>
