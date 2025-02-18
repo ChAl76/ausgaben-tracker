@@ -19,3 +19,47 @@ body {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+h1,
+h2 {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 1.2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.input-group input,
+.input-group select {
+  width: calc(100% - 1rem);
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.button-group button,
+.clear-button-group button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #1a5ea6;
+  border-radius: 5px;
+  background: #328ff2;
+  color: #fff;
+  cursor: pointer;
+}
