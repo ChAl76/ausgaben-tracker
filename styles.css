@@ -108,3 +108,21 @@ td button {
 td button:hover {
   background-color: #126ccc;
 }
+
+.summary {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary label {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.summary span {
+  font-weight: bold;
+}
