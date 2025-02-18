@@ -63,3 +63,8 @@ h2 {
   color: #fff;
   cursor: pointer;
 }
+
+.button-group button:hover,
+.clear-button-group button:hover {
+  background: #126ccc;
+}
