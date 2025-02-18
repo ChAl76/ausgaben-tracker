@@ -110,15 +110,15 @@ td button:hover {
 }
 
 .summary {
-  margin-top: 1rem;
   padding: 1rem;
-  background-color: #f0f0f0;
+  background-color: #e3f0ff;
   color: #333;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.summary label {
+.summary label,
+.summary-group {
   margin: 0.5rem 0;
   font-size: 1.1rem;
 }
