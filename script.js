@@ -68,3 +68,10 @@ function updateSummary() {
   totalIncome.textContent = totalIncomes.toFixed(2);
   balance.textContent = (totalIncomes - totalExpenses).toFixed(2);
 }
+
+// Clearing Form Inputs
+function clearInputs() {
+  expenseInput.value = '';
+  amountInput.value = '';
+  categoryInput.value = 'Ausgaben';
+}
