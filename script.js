@@ -9,13 +9,15 @@ const totalExpenseElement = document.getElementById('total-expense');
 const totalIncomeElement = document.getElementById('total-income');
 const balanceElement = document.getElementById('balance');
 
-// Функция добавления дохода
+// Adding an Income
 function addIncome() {
   const description = incomeDesc.value.trim();
   const amount = parseFloat(incomeAmount.value.trim());
 
   if (description === '' || isNaN(amount) || amount <= 0) {
-    alert('Пожалуйста, введите корректное описание и сумму');
+    alert(
+      'Bitte geben Sie eine gültige Beschreibung und einen gültigen Betrag ein.'
+    );
     return;
   }
 
@@ -24,14 +26,16 @@ function addIncome() {
   clearInputs('income');
 }
 
-// Функция добавления расхода
+// Adding an Expense
 function addExpense() {
   const description = expenseDesc.value.trim();
   const amount = parseFloat(expenseAmount.value.trim());
   const category = expenseCategory.value;
 
   if (description === '' || isNaN(amount) || amount <= 0) {
-    alert('Пожалуйста, введите корректное описание и сумму');
+    alert(
+      'Bitte geben Sie eine gültige Benbeschreibung und einen gültigen Betrag ein.'
+    );
     return;
   }
 
@@ -40,7 +44,7 @@ function addExpense() {
   clearInputs('expense');
 }
 
-// Функция добавления транзакции
+// Add Transaction
 function addTransaction(description, amount, category, type) {
   const transactionRow = document.createElement('tr');
 
@@ -55,14 +59,14 @@ function addTransaction(description, amount, category, type) {
   transactionsHistory.appendChild(transactionRow);
 }
 
-// Функция удаления транзакции
+// Delete Transaction
 function deleteTransaction(button) {
   const row = button.closest('tr');
   row.remove();
   updateSummary();
 }
 
-// Обновление итогов
+//  updateSummary
 function updateSummary() {
   let totalExpenses = 0;
   let totalIncomes = 0;
@@ -85,7 +89,7 @@ function updateSummary() {
   balanceElement.textContent = (totalIncomes - totalExpenses).toFixed(2);
 }
 
-// Очистка полей ввода
+// Clear Inputs
 function clearInputs(type) {
   if (type === 'income') {
     incomeDesc.value = '';
@@ -97,7 +101,7 @@ function clearInputs(type) {
   }
 }
 
-// Функция очистки всех данных
+// Clear All Transactions
 function clearAll() {
   transactionsHistory.innerHTML = '';
   updateSummary();
