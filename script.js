@@ -7,6 +7,7 @@ const totalExpense = document.getElementById('#total-expense');
 const totalIncome = document.getElementById('#total-income');
 const balance = document.getElementById('#balance');
 
+// Adding an Expense
 expenseForm.addEventListener('submit', function (e) {
   e.preventDefault();
   const description = expenseInput.value.trim();
@@ -43,4 +44,27 @@ function addTransaction(description, amount, category) {
       transactionRow.remove();
       updateSummary();
     });
+}
+
+// Updating the Summary
+function updateSummary() {
+  let totalExpenses = 0;
+  let totalIncomes = 0;
+
+  const transactions = transactionList.querySelectorAll('tr');
+
+  transactions.forEach(function (transaction) {
+    const amount = parseFloat(transaction.children[2].textContent);
+    const category = transaction.children[1].textContent;
+
+    if (category === 'Einnahmen') {
+      totalIncomes += amount;
+    } else {
+      totalExpenses += amount;
+    }
+  });
+
+  totalExpense.textContent = totalExpenses.toFixed(2);
+  totalIncome.textContent = totalIncomes.toFixed(2);
+  balance.textContent = (totalIncomes - totalExpenses).toFixed(2);
 }
