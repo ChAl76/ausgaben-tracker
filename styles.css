@@ -119,6 +119,19 @@ td button:hover {
   background-color: #126ccc;
 }
 
+#notification {
+  background-color: #3bd059;
+  color: #ffffff;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
 .summary {
   padding: 1rem;
   background-color: #d0edff;
