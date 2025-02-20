@@ -88,7 +88,17 @@ function updateSummary() {
 
   totalExpenseElement.textContent = totalExpenses.toFixed(2);
   totalIncomeElement.textContent = totalIncomes.toFixed(2);
-  balanceElement.textContent = (totalIncomes - totalExpenses).toFixed(2);
+
+  const currentBalance = totalIncomes - totalExpenses;
+  balanceElement.textContent = currentBalance.toFixed(2);
+
+  if (currentBalance >= 0) {
+    balanceElement.classList.remove('negative');
+    balanceElement.classList.add('positive');
+  } else {
+    balanceElement.classList.remove('positive');
+    balanceElement.classList.add('negative');
+  }
 }
 
 // Clear Inputs
