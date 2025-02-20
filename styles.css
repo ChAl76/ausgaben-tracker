@@ -43,6 +43,14 @@ h2 {
   color: #232323;
 }
 
+.income-amt {
+  color: #1abe1a;
+}
+
+.expense-amt {
+  color: #c31818;
+}
+
 .input-group input,
 .input-group select {
   width: calc(100% - 1rem);
