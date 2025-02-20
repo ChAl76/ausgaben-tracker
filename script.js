@@ -5,6 +5,7 @@ const expenseDesc = document.getElementById('expense-dsc');
 const expenseAmount = document.getElementById('expense-amt');
 const expenseCategory = document.getElementById('expense-cat');
 const transactionsHistory = document.getElementById('transactions-history');
+const notification = document.getElementById('notification');
 const totalExpenseElement = document.getElementById('total-expense');
 const totalIncomeElement = document.getElementById('total-income');
 const balanceElement = document.getElementById('balance');
@@ -22,6 +23,7 @@ function addIncome() {
   }
 
   addTransaction(description, amount, 'Einnahmen', 'income');
+  showNotification('Transaktion hinzugefügt');
   updateSummary();
   clearInputs('income');
 }
@@ -40,6 +42,7 @@ function addExpense() {
   }
 
   addTransaction(description, amount, category, 'expense');
+  showNotification('Transaktion hinzugefügt');
   updateSummary();
   clearInputs('expense');
 }
@@ -60,6 +63,16 @@ function addTransaction(description, amount, category, type) {
     `;
 
   transactionsHistory.appendChild(transactionRow);
+}
+
+// Show Notification
+function showNotification(message) {
+  notification.textContent = message;
+  notification.classList.remove('hidden');
+
+  setTimeout(function () {
+    notification.classList.add('hidden');
+  }, 2000);
 }
 
 // Delete Transaction
