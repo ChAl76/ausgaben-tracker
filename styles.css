@@ -43,12 +43,14 @@ h2 {
   color: #232323;
 }
 
-.income-amt {
-  color: #1abe1a;
+.income-amt,
+.positive {
+  color: #0ac20a;
 }
 
-.expense-amt {
-  color: #c31818;
+.expense-amt,
+.negative {
+  color: #da1111;
 }
 
 .input-group input,
