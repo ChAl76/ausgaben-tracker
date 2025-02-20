@@ -47,11 +47,14 @@ function addExpense() {
 // Add Transaction
 function addTransaction(description, amount, category, type) {
   const transactionRow = document.createElement('tr');
+  const formattedAmount = type === 'expense' ? -amount : amount;
 
   transactionRow.innerHTML = `
         <td>${description}</td>
         <td>${category}</td>
-        <td>${amount.toFixed(2)}</td>
+        <td class="${type === 'expense' ? 'expense-amt' : 'income-amt'}">
+            ${formattedAmount.toFixed(2)}
+        </td>
         <td>${type === 'income' ? 'Einnahmen' : 'Ausgaben'}</td>
         <td><button onclick="deleteTransaction(this)">Löschen</button></td>
     `;
@@ -75,12 +78,11 @@ function updateSummary() {
 
   transactions.forEach(function (transaction) {
     const amount = parseFloat(transaction.children[2].textContent);
-    const type = transaction.children[3].textContent;
 
-    if (type === 'Einnahmen') {
+    if (amount > 0) {
       totalIncomes += amount;
     } else {
-      totalExpenses += amount;
+      totalExpenses += Math.abs(amount);
     }
   });
 
