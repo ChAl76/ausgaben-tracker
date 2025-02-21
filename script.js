@@ -15,16 +15,12 @@ function addIncome() {
   const description = incomeDesc.value.trim();
   const amount = parseFloat(incomeAmount.value.trim());
 
-  if (description === '' || isNaN(amount) || amount <= 0) {
-    alert(
-      'Bitte geben Sie eine gültige Beschreibung und einen gültigen Betrag ein.'
-    );
-    return;
-  }
+  if (!validateInput(description, amount)) return;
 
   addTransaction(description, amount, 'Einnahmen', 'income');
   showNotification('Transaktion hinzugefügt');
   updateSummary();
+  saveTransactions();
   clearInputs('income');
 }
 
@@ -34,10 +30,7 @@ function addExpense() {
   const amount = parseFloat(expenseAmount.value.trim());
   const category = expenseCategory.value;
 
-  if (description === '' || isNaN(amount) || amount <= 0) {
-    alert(
-      'Bitte geben Sie eine gültige Benbeschreibung und einen gültigen Betrag ein.'
-    );
+  if (!validateInput(description, amount)) {
     return;
   }
 
@@ -45,6 +38,24 @@ function addExpense() {
   showNotification('Transaktion hinzugefügt');
   updateSummary();
   clearInputs('expense');
+}
+
+// validate input
+function validateInput(description, amount) {
+  if (!description || description.length > 50) {
+    showNotification(
+      'Beschreibung muss zwischen 1 und 50 Zeichen sein.',
+      'error'
+    );
+    return false;
+  }
+
+  if (isNaN(amount) || amount <= 0 || amount > 1000000) {
+    showNotification('Betrag muss zwischen 1 und 1.000.000€ sein.', 'error');
+    return false;
+  }
+
+  return true;
 }
 
 // Add Transaction
@@ -62,17 +73,17 @@ function addTransaction(description, amount, category, type) {
         <td><button onclick="deleteTransaction(this)">Löschen</button></td>
     `;
 
+  transactionRow.classList.add('transaction-row');
   transactionsHistory.appendChild(transactionRow);
 }
 
 // Show Notification
-function showNotification(message) {
+function showNotification(message, type = 'success') {
   notification.textContent = message;
   notification.classList.remove('hidden');
+  notification.style.backgroundColor = type === 'error' ? '#da1111' : '#0ac20a';
 
-  setTimeout(function () {
-    notification.classList.add('hidden');
-  }, 3000);
+  setTimeout(() => notification.classList.add('hidden'), 2500);
 }
 
 // Delete Transaction
@@ -80,6 +91,7 @@ function deleteTransaction(button) {
   const row = button.closest('tr');
   row.remove();
   updateSummary();
+  saveTransactions();
 }
 
 //  updateSummary
@@ -90,7 +102,8 @@ function updateSummary() {
   const transactions = transactionsHistory.querySelectorAll('tr');
 
   transactions.forEach(function (transaction) {
-    const amount = parseFloat(transaction.children[2].textContent);
+    const amountCell = transaction.querySelector('td:nth-child(3)');
+    const amount = parseFloat(amountCell.textContent);
 
     if (amount > 0) {
       totalIncomes += amount;
@@ -105,13 +118,8 @@ function updateSummary() {
   const currentBalance = totalIncomes - totalExpenses;
   balanceElement.textContent = currentBalance.toFixed(2);
 
-  if (currentBalance >= 0) {
-    balanceElement.classList.remove('negative');
-    balanceElement.classList.add('positive');
-  } else {
-    balanceElement.classList.remove('positive');
-    balanceElement.classList.add('negative');
-  }
+  balanceElement.classList.remove('negative', 'positive');
+  balanceElement.classList.add(currentBalance >= 0 ? 'positive' : 'negative');
 }
 
 // Clear Inputs
@@ -130,6 +138,9 @@ function clearInputs(type) {
 function clearAll() {
   transactionsHistory.innerHTML = '';
   updateSummary();
+  saveTransactions();
   clearInputs('income');
   clearInputs('expense');
 }
+
+document.addEventListener('DOMContentLoaded', loadTransactions);
