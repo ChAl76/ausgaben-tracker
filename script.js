@@ -134,6 +134,27 @@ function clearInputs(type) {
   }
 }
 
+// Save All Transactions
+function saveTransactions() {
+  const transactions = Array.from(transactionsHistory.children).map((row) => ({
+    description: row.cells[0].textContent,
+    category: row.cells[1].textContent,
+    amount: parseFloat(row.cells[2].textContent),
+    type: row.cells[3].textContent === 'Einnahmen' ? 'income' : 'expense',
+  }));
+  localStorage.setItem('transactions', JSON.stringify(transactions));
+}
+
+// Load transactions from localStorage
+function loadTransactions() {
+  const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+  transactions.forEach((t) => {
+    const amount = Math.abs(t.amount);
+    addTransaction(t.description, amount, t.category, t.type);
+  });
+  updateSummary(); // Обновляем итоги после загрузки
+}
+
 // Clear All Transactions
 function clearAll() {
   transactionsHistory.innerHTML = '';
