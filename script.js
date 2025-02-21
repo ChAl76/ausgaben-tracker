@@ -36,6 +36,7 @@ function addExpense() {
 
   addTransaction(description, amount, category, 'expense');
   showNotification('Transaktion hinzugefügt');
+  saveTransactions();
   updateSummary();
   clearInputs('expense');
 }
