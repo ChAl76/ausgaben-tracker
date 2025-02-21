@@ -120,16 +120,25 @@ td button:hover {
 }
 
 #notification {
-  background-color: #3bd059;
-  color: #ffffff;
+  background-color: #0ac20a;
+  color: #fff;
   padding: 10px;
-  margin-top: 10px;
   text-align: center;
   border-radius: 5px;
+  position: fixed;
+  /* top: 50vh; */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  min-width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 1.3s ease-in-out;
 }
 
 .hidden {
-  display: none;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .summary {

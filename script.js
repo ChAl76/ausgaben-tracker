@@ -72,7 +72,7 @@ function showNotification(message) {
 
   setTimeout(function () {
     notification.classList.add('hidden');
-  }, 2000);
+  }, 3000);
 }
 
 // Delete Transaction
