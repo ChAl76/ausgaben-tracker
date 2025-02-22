@@ -113,12 +113,19 @@ function updateSummary() {
     }
   });
 
-  totalExpenseElement.textContent = totalExpenses.toFixed(2);
   totalIncomeElement.textContent = totalIncomes.toFixed(2);
+  totalIncomeElement.classList.remove('negative', 'positive');
+  totalIncomeElement.classList.add('positive');
+
+  totalExpenseElement.textContent =
+    totalExpenses === 0 ? '0.00' : `-${totalExpenses.toFixed(2)}`;
+  totalExpenseElement.classList.remove('negative', 'positive');
+  totalExpenseElement.classList.add(
+    totalExpenses === 0 ? 'positive' : 'negative'
+  );
 
   const currentBalance = totalIncomes - totalExpenses;
   balanceElement.textContent = currentBalance.toFixed(2);
-
   balanceElement.classList.remove('negative', 'positive');
   balanceElement.classList.add(currentBalance >= 0 ? 'positive' : 'negative');
 }
@@ -153,7 +160,7 @@ function loadTransactions() {
     const amount = Math.abs(t.amount);
     addTransaction(t.description, amount, t.category, t.type);
   });
-  updateSummary(); // Обновляем итоги после загрузки
+  updateSummary();
 }
 
 // Clear All Transactions
