@@ -75,7 +75,7 @@ function addTransaction(description, amount, category, type) {
             ${formattedAmount.toFixed(2)}
         </td>
         <td>${type === 'income' ? 'Einnahmen' : 'Ausgaben'}</td>
-        <td><button onclick="deleteTransaction(this)">Löschen</button></td>
+        <td><button class="delete-button" onclick="deleteTransaction(this)"><i class="fas fa-trash"></i></button></td>
     `;
 
   transactionRow.classList.add('transaction-row');
