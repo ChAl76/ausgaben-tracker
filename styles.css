@@ -177,6 +177,15 @@ td button:hover {
   color: #da1111;
 }
 
+.clear-button-group button {
+  margin-top: 1rem;
+  background-color: #9a000f;
+}
+
+.clear-button-group button:hover {
+  background-color: #6a000f;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   body {
