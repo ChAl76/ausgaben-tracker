@@ -6,8 +6,8 @@ body {
   padding: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
 .container {
@@ -159,7 +159,7 @@ td button:hover {
   font-weight: bold;
 }
 
-/* Responsive styles */
+/* Responsive */
 @media (max-width: 768px) {
   body {
     height: auto;
@@ -218,7 +218,7 @@ td button:hover {
   }
 
   #notification {
-    top: 200px;
+    top: 630px;
     width: 50%;
     min-width: 0;
     font-size: 0.9rem;
@@ -264,5 +264,13 @@ td button:hover {
   td button {
     padding: 0.2rem 0.4rem;
     font-size: 0.7rem;
+  }
+
+  #notification {
+    top: 600px;
+    width: 50%;
+    min-width: 0;
+    font-size: 0.9rem;
+    padding: 8px;
   }
 }
