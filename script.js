@@ -10,6 +10,10 @@ const totalExpenseElement = document.getElementById('total-expense');
 const totalIncomeElement = document.getElementById('total-income');
 const balanceElement = document.getElementById('balance');
 
+window.addEventListener('load', function () {
+  expenseAmount.focus();
+});
+
 // Adding an Income
 function addIncome() {
   const description = incomeDesc.value.trim();
