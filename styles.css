@@ -20,16 +20,46 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1,
+.language-switcher {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.language-switcher label {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  color: #232323;
+}
+
+.language-switcher select {
+  padding: 0.2rem;
+  font-size: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  .coins {
+    font-size: 1.6rem;
+    margin-right: 0.5rem;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+}
+
 h2 {
   text-align: center;
-}
-
-h1 {
-  margin-bottom: 1.2rem;
-}
-
-h2 {
   margin-bottom: 1rem;
 }
 
@@ -94,16 +124,6 @@ td {
   padding: 0.5rem;
   border-bottom: 1px solid #ccc;
   text-align: left;
-}
-
-td:nth-child(3) {
-  text-align: right;
-  padding-right: 1.5rem;
-}
-
-.income-amt,
-.expense-amt {
-  text-align: right;
 }
 
 th {
