@@ -4,53 +4,86 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ausgaben Tracker</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Ausgaben Tracker</h1>
+      <div class="language-switcher">
+        <label for="language-select">Sprache/Währung:</label>
+        <select id="language-select">
+          <option value="de">Deutsch (€)</option>
+          <option value="ua">Українська (₴)</option>
+          <option value="en">English ($)</option>
+        </select>
+      </div>
+
+      <div class="title">
+        <i class="coins fas fa-coins"></i>
+        <h1 data-i18n="title">Ausgaben Tracker</h1>
+      </div>
 
       <div class="section">
-        <h2>Einnahmen</h2>
+        <h2 data-i18n="income_title">Einnahmen</h2>
         <div class="input-group">
-          <label for="income-dsc">Beschreibung</label>
+          <label for="income-dsc" data-i18n="description">Beschreibung</label>
           <input type="text" id="income-dsc" placeholder="e.g. Gehalt" />
         </div>
         <div class="input-group">
-          <label for="income-amt">Betrag (€)</label>
-          <input type="number" id="income-amt" min="0" step="0.01" required placeholder="e.g. 10000" />
+          <label for="income-amt" data-i18n="amount">Betrag (€)</label>
+          <input
+            type="number"
+            id="income-amt"
+            min="0"
+            step="0.01"
+            required
+            placeholder="e.g. 10000"
+          />
         </div>
         <div class="button-group">
-          <button type="button" onclick="addIncome()">
+          <button type="button" onclick="addIncome()" data-i18n="add_income">
             Einnahmen Hinzufügen
           </button>
         </div>
       </div>
 
       <div class="section">
-        <h2>Ausgaben</h2>
+        <h2 data-i18n="expense_title">Ausgaben</h2>
         <div class="input-group">
-          <label for="expense-dsc">Beschreibung</label>
+          <label for="expense-dsc" data-i18n="description">Beschreibung</label>
           <input type="text" id="expense-dsc" placeholder="e.g. Miete" />
         </div>
         <div class="input-group">
-          <label for="expense-cat">Kategorie</label>
+          <label for="expense-cat" data-i18n="category">Kategorie</label>
           <select id="expense-cat">
-            <option value="Haus">Haus</option>
-            <option value="Lebensmittel">Lebensmittel</option>
-            <option value="Gesundheit">Gesundheit</option>
-            <option value="Auto">Auto</option>
-            <option value="Freizeit">Freizeit</option>
-            <option value="Sonstiges">Sonstiges</option>
+            <option value="Haus" data-i18n="cat_house">Haus</option>
+            <option value="Lebensmittel" data-i18n="cat_food">
+              Lebensmittel
+            </option>
+            <option value="Gesundheit" data-i18n="cat_health">
+              Gesundheit
+            </option>
+            <option value="Auto" data-i18n="cat_car">Auto</option>
+            <option value="Freizeit" data-i18n="cat_leisure">Freizeit</option>
+            <option value="Sonstiges" data-i18n="cat_other">Sonstiges</option>
           </select>
         </div>
         <div class="input-group">
-          <label for="expense-amt">Betrag (€)</label>
-          <input type="number" id="expense-amt" min="0" step="0.01" required placeholder="e.g. 5000" />
+          <label for="expense-amt" data-i18n="amount">Betrag (€)</label>
+          <input
+            type="number"
+            id="expense-amt"
+            min="0"
+            step="0.01"
+            required
+            placeholder="e.g. 5000"
+          />
         </div>
         <div class="button-group">
-          <button type="button" onclick="addExpense()">
+          <button type="button" onclick="addExpense()" data-i18n="add_expense">
             Ausgaben Hinzufügen
           </button>
         </div>
@@ -59,44 +92,51 @@
       <div id="notification" class="hidden"></div>
 
       <div class="table-container">
-        <h2>Transaktionsverlauf</h2>
+        <h2 data-i18n="transactions_title">Transaktionsverlauf</h2>
         <table>
           <thead>
             <tr>
-              <th>Beschreibung</th>
-              <th>Kategorie</th>
-              <th>Betrag (€)</th>
-              <th>Typ</th>
-              <th>Aktion</th>
-              <!-- Delete button will be added here -->
+              <th data-i18n="description">Beschreibung</th>
+              <th data-i18n="category">Kategorie</th>
+              <th data-i18n="amount">Betrag (€)</th>
+              <th data-i18n="type">Typ</th>
+              <th data-i18n="action">Aktion</th>
             </tr>
           </thead>
-          <tbody id="transactions-history">
-            <!-- Transactions will be added here -->
-          </tbody>
+          <tbody id="transactions-history"></tbody>
         </table>
       </div>
 
       <div class="summary">
-        <h2>Zusammenfassung</h2>
+        <h2 data-i18n="summary_title">Zusammenfassung</h2>
         <div class="summary-group">
-          <label for="total-income">Gesamte Einnahmen:</label>
-          <span id="total-income">0.00</span>
+          <label for="total-income" data-i18n="total_income"
+            >Gesamte Einnahmen:</label
+          >
+          <span id="total-income" class="positive">0.00</span>
         </div>
         <div class="summary-group">
-          <label for="total-expense">Gesamte Ausgaben:</label>
-          <span id="total-expense">0.00</span>
+          <label for="total-expense" data-i18n="total_expense"
+            >Gesamte Ausgaben:</label
+          >
+          <span id="total-expense" class="positive">0.00</span>
         </div>
         <div class="summary-group">
-          <label for="balance">Kontostand:</label>
-          <span id="balance">0.00</span>
+          <label for="balance" data-i18n="balance">Kontostand:</label>
+          <span id="balance" class="positive">0.00</span>
         </div>
+      </div>
+
+      <div class="clear-button-group">
+        <button type="button" onclick="clearAll()" data-i18n="clear_all">
+          Alles Löschen
+        </button>
+      </div>
     </div>
 
-    <div class="clear-button-group">
-      <button type="button" onclick="clearAll()">Alles Löschen</button>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="js/elements.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
