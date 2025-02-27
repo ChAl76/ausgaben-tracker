@@ -186,6 +186,10 @@ td button:hover {
   font-size: 1.1rem;
 }
 
+.summary h2 {
+  color: #083c73;
+}
+
 .summary span {
   font-weight: bold;
 }
