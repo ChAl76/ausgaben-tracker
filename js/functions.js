@@ -54,7 +54,7 @@ function addTransaction(description, amount, category, type) {
       <td>${description}</td>
       <td>${category}</td>
       <td class="${type === 'expense' ? 'expense-amt' : 'income-amt'}">
-        ${formattedAmount.toFixed(2)}
+        ${formattedAmount.toFixed(2)} ${currentCurrency}
       </td>
       <td>${
         type === 'income'
@@ -92,24 +92,33 @@ function updateSummary() {
   const transactions = transactionsHistory.querySelectorAll('tr');
   transactions.forEach((transaction) => {
     const amountCell = transaction.querySelector('td:nth-child(3)');
-    const amount = parseFloat(amountCell.textContent);
+    const amountText = amountCell.textContent
+      .replace(currentCurrency, '')
+      .trim();
+    const amount = parseFloat(amountText);
     if (amount > 0) totalIncomes += amount;
     else totalExpenses += Math.abs(amount);
   });
 
-  totalIncomeElement.textContent = totalIncomes.toFixed(2);
+  totalIncomeElement.textContent = `${totalIncomes.toFixed(
+    2
+  )} ${currentCurrency}`;
   totalIncomeElement.classList.remove('negative', 'positive');
   totalIncomeElement.classList.add('positive');
 
   totalExpenseElement.textContent =
-    totalExpenses === 0 ? '0.00' : `-${totalExpenses.toFixed(2)}`;
+    totalExpenses === 0
+      ? `0.00 ${currentCurrency}`
+      : `-${totalExpenses.toFixed(2)} ${currentCurrency}`;
   totalExpenseElement.classList.remove('negative', 'positive');
   totalExpenseElement.classList.add(
     totalExpenses === 0 ? 'positive' : 'negative'
   );
 
   const currentBalance = totalIncomes - totalExpenses;
-  balanceElement.textContent = currentBalance.toFixed(2);
+  balanceElement.textContent = `${currentBalance.toFixed(
+    2
+  )} ${currentCurrency}`;
   balanceElement.classList.remove('negative', 'positive');
   balanceElement.classList.add(currentBalance >= 0 ? 'positive' : 'negative');
 }
@@ -128,15 +137,20 @@ function clearInputs(type) {
 
 // Save Transactions
 function saveTransactions() {
-  const transactions = Array.from(transactionsHistory.children).map((row) => ({
-    description: row.cells[0].textContent,
-    category: row.cells[1].textContent,
-    amount: parseFloat(row.cells[2].textContent),
-    type:
-      row.cells[3].textContent === translations[currentLang].income
-        ? 'income'
-        : 'expense',
-  }));
+  const transactions = Array.from(transactionsHistory.children).map((row) => {
+    const amountText = row.cells[2].textContent
+      .replace(currentCurrency, '')
+      .trim();
+    return {
+      description: row.cells[0].textContent,
+      category: row.cells[1].textContent,
+      amount: parseFloat(amountText),
+      type:
+        row.cells[3].textContent === translations[currentLang].income
+          ? 'income'
+          : 'expense',
+    };
+  });
   localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 

@@ -27,6 +27,7 @@ const translations = {
     currency: '€',
     validation_desc: 'Beschreibung muss zwischen 1 und 50 Zeichen sein.',
     validation_amount: 'Betrag muss zwischen 1 und 1.000.000€ sein.',
+    currency: '€',
   },
   ua: {
     title: 'Трекер Витрат',
@@ -56,6 +57,7 @@ const translations = {
     currency: '₴',
     validation_desc: 'Опис має бути від 1 до 50 символів.',
     validation_amount: 'Сума має бути від 1 до 1.000.000₴.',
+    currency: '₴',
   },
   en: {
     title: 'Expense Tracker',
@@ -85,13 +87,16 @@ const translations = {
     currency: '$',
     validation_desc: 'Description must be between 1 and 50 characters.',
     validation_amount: 'Amount must be between 1 and 1,000,000$.',
+    currency: '$',
   },
 };
 
 let currentLang = localStorage.getItem('language') || 'de';
+let currentCurrency = translations[currentLang].currency;
 
 function updateLanguage(lang) {
   currentLang = lang;
+  currentCurrency = translations[lang].currency;
   localStorage.setItem('language', lang);
   document.querySelectorAll('[data-i18n]').forEach((element) => {
     const key = element.getAttribute('data-i18n');
@@ -104,16 +109,18 @@ function updateLanguage(lang) {
 
 function updateTransactionsCurrency() {
   const transactions = transactionsHistory.querySelectorAll('tr');
+
   transactions.forEach((row) => {
     const amountCell = row.querySelector('td:nth-child(3)');
-    const amount = parseFloat(amountCell.textContent);
+    const amountText = amountCell.textContent.replace(/[^\d.-]/g, '');
+    const amount = parseFloat(amountText);
     amountCell.textContent = `${amount < 0 ? '-' : ''}${Math.abs(
       amount
-    ).toFixed(2)}`;
+    ).toFixed(2)} ${currentCurrency}`;
   });
-  document.querySelector(
-    'th[data-i18n="amount"]'
-  ).textContent = `Betrag (${translations[currentLang].currency})`;
+  document.querySelector('th[data-i18n="amount"]').textContent = `${
+    translations[currentLang].amount.split(' ')[0]
+  } (${currentCurrency})`;
 }
 
 languageSelect.value = currentLang;
